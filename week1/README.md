@@ -254,23 +254,3 @@ for( int temp : arr ) {
 ```
 
 ```
-1. boolean isSunny, isRainy;
-2. int a1, a2, a3 = 1;
-3. double d1 = 100000;
-4. short s1 = 100000;
-5. String str1 = new String("새로운 문자열");
-```
-
-```
-String adviceDay = "20221012";
-boolean allAttendance = false;
-		
-if(adviceDay.equals("20221012")) {
-	if(allAttendance) {
-		String str = "모두 참석하였습니다.";
-	}
-	System.out.println(str);
-}
-```
-
-
