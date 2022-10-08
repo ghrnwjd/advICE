@@ -253,3 +253,179 @@ for( int temp : arr ) {
 } 
 ```
 
+## ***6. 클래스***
+
+자바에서 `클래스`란 `객체`를 만들어 내기 위한 틀이다.
+클래스를 구현한 것이 객체라고 봐도 된다. 이때 클래스로부터 객체를 생성하는 과정을 `클래스의 인스턴스화`라고 한다. 
+
+`인스턴스`란 메모리에 올라간 `객체`를 의미한다.
+
+`class` 키워드를 통해 클래스를 선언하고 클래스의 구성요소를 `member`라고 한다.
+member의 구성요소로는 `field`와 `method`가 있다.
+또한 클래스는 객체의 필드를 초기화해주는 `constructor`를 가진다.
+
+객체 내에 값을 저장할 멤버 변수를 필드라고 하며 선언된 위치에 따라 <br/>`static variable`, `instance variable`, `local variable` 로 나뉜다.
+
+![변수종류와 특징](https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe3a2442b-d93a-4f76-b503-f51f1b63157d%2FUntitled.png&blockId=9d2e4ecd-1690-40c4-896b-656e7f9c175c)
+<br/>
+
+
+객체의 행동을 구현하는 것을 메소드라고 한다.
+
+클래스의 이름과 동일한 이름을 가진 메소드를 생성자라고 한다. 객체가 생성될때 자동으로 호출된다.
+<br>
+
+```
+// 클래스
+public class Student{
+    
+    // 필드
+	String name;		//이름
+	int studentNumber;	//학번
+	String major;		//전공
+	int grade;			//학년
+
+    // 생성자
+    public Student(String name) {
+        this.name = name;
+    }
+
+    // 메소드
+    public String getName() {
+        return this.name;
+    }
+}
+```
+
+### ***추상 클래스***
+
+하나 이상의 `abstract method`를 포함하고 있는 클래스라면 추상 클래스이다.
+추상클래스의 메소드를 사용하려면 상속받아 반드시 추상메소드를 `재정의`해야한다.
+추상클래스는 ***인스턴스를 생성할 수 없다.***
+
+`추상메소드`란 자식 클래스에서 반드시 `override`해야 사용할 수 있는 메소드이다.
+
+
+```
+abstract class Animal { abstract void cry(); }
+
+class Cat extends Animal { void cry() { System.out.println("냐옹냐옹!"); } }
+
+class Dog extends Animal { void cry() { System.out.println("멍멍!"); } }
+ 
+
+public class Polymorphism02 {
+
+    public static void main(String[] args) {
+
+        // Animal a = new Animal(); // 추상 클래스는 인스턴스를 생성할 수 없음.
+        Cat c = new Cat();
+        Dog d = new Dog(); 
+
+        c.cry();
+        d.cry();
+    }
+}
+```
+
+## ***인터페이스***
+
+자식 클래스가 여러 부모클래스를 상속할 수 있다면 부모 클래스에서 선언한 메소드를 모두 사용할 수 있지만 어떤 부모의 메소드인지 모호해지기 때문에 자바에서는 `다중상속`을 지원하지 않는다.
+
+다중상속의 메리트를 유지하기 위해 자바에서는 `인터페이스`를 지원하고 추상메소드와 상수만을 포함할 수 있다. `추상클래스`와 다른점은 생성자를 선언하지는 못한다.
+
+### 규칙
+- 인터페이스의 모든 필드는 `public static final `이어야 한다.
+- 인터페이스의 모든 메소드는 `public abstract` 여야 한다.
+
+생략되었다면 자바컴파일러가 자동으로 추가한다.
+
+```
+interface Animal { public abstract void cry(); }
+interface Pet { public abstract void play(); }
+
+class Cat implements Animal, Pet {
+
+    public void cry() {
+        System.out.println("냐옹냐옹!");
+    }
+    public void play() {
+        System.out.println("쥐 잡기 놀이하자~!");
+    }
+}
+
+ 
+
+class Dog implements Animal, Pet {
+    
+    public void cry() {
+        System.out.println("멍멍!");
+    }
+
+    public void play() {
+        System.out.println("산책가자~!");
+    }
+}
+
+ 
+
+public class Polymorphism {
+    public static void main(String[] args) {
+        Cat c = new Cat();
+        Dog d = new Dog();
+
+        c.cry();
+        c.play();
+
+        d.cry();
+        d.play();
+    }
+}
+```
+
+예제<br>
+```
+public class Main {	
+	
+	public static void main(String[] args) throws IOException {
+		
+		Animal animal = new Animal();
+		animal.getLegs();
+		
+		Person person = new Person();
+		person.getLegs();
+		person.personSpeak();		
+        
+	}
+}
+
+class Animal {
+	String name;
+	int legs;
+	
+	public Animal() {
+		name = null;
+		this.legs = 4;
+	}
+	
+	public void setLegs(int legs) {
+		this.legs = legs;
+	}
+	public void getLegs() {
+		System.out.println(name + " " + this.legs + "개의 다리를 가지고 있습니다.");
+	}	
+}
+
+class Person extends Animal {
+		
+	public Person() {
+		super();
+		super.name = "사람";
+		super.legs = 2;		
+	}
+	
+	public void personSpeak() {
+		System.out.println("사람은 말을 할 수 있어요.");
+	}	
+}
+```
