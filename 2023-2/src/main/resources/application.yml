@@ -8,6 +8,12 @@ server:
       force: true
 
 spring:
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+
   mvc:
     view:
       prefix:
@@ -15,14 +21,14 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/til?serverTimezone=Asia/Seoul
-    username:
-    password:
+    url: jdbc:mysql://localhost:3306/advice?serverTimezone=Asia/Seoul
+    username: ghrnwjd
+    password: 1234
 
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         #PhysicalNamingStrategyStandardImpl = Entity ? ?? ? ??? ??? ???? ????.
