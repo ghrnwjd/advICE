@@ -1,6 +1,7 @@
 package com.advice.springboot.data.entity;
 
 
+import com.advice.springboot.data.dto.MemberJoinDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,5 +35,8 @@ public class Member {
 
       @OneToMany(mappedBy = "member")
       List<Board> boardList = new ArrayList<>();
+
+
+
 
 }
