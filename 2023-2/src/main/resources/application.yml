@@ -21,14 +21,14 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/advice?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul
     username: ghrnwjd
     password: 1234
 
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         #PhysicalNamingStrategyStandardImpl = Entity ? ?? ? ??? ??? ???? ????.
@@ -36,7 +36,7 @@ spring:
       # ??? ???? (@GeneratedValue? ???? ?? ??? ??)
       use-new-id-generator-mappings: false # jpa ? ????? ???? ???.
 
-    show-sql: false # sql?? ???? ????.
+    show-sql: true # sql?? ???? ????.
     properties:
       hibernate.format_sql: true # ???? ???? ?????.
 
