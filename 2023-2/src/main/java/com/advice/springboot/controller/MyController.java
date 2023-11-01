@@ -15,7 +15,6 @@ import java.util.List;
 public class MyController {
 
       private BoardService boardService;
-
       public MyController(BoardService boardService) {
             this.boardService = boardService;
       }

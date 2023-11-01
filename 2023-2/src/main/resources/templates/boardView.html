@@ -4,17 +4,87 @@
     <meta charset="UTF-8">
     <title>advICE 중고거래 게시판</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+<style>
+    @font-face {
+      font-family: 'LINESeedKR-Bd';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    div, h1, h2, h3, h4, h5, h6, p, span, tr, td, a {
+        font-family: 'LINESeedKR-Bd';
+    }
+    a {
+        color: inherit;
+        font-weight: bold;
+    }
+</style>
 <body>
 
-<h2>제목 : </h2><h2 th:text="${board.title}"></h2>
+<nav class="navbar navbar-expand-sm bg-light">
 
-<p>내용 : </p><p th:text="${board.content}"></p>
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/">홈</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/board">게시판</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">로그인</a>
+        </li>
+    </ul>
+</nav>
+<div class="container my-3">
+<h1  th:text="${board.title}"></h1>
+    <p><p>조회수: <span>3</span></p> <p>가격: <span id="price" th:text="${board.price} + '원'">3</span></p></p>
+        <p>작성자: <span id="celler"  th:text="${board.member.membername}"></span></p>
 
-<p>가격 : </p><p th:text="${board.price}"></p>
+        <div class="card">
+            <div class="card-body">
+                <p th:text="${board.content}"></p>
+            </div>
+        </div>
+    <br><br>
+    <form>
+        <input type="text" id="membername" placeholder="이름을 입력해주세요"><br>
+        <button onclick="buySubmit()" class="btn btn-secondary btn-lg btn-block">해당 상품 구매</button>
+    </form>
+
+</div>
+
+
+<script th:inline="javascript">
+
+    function buySubmit() {
+
+        let data = {
+            "cellerName": [[${board.member.membername}]],
+            "price": [[${board.price}]],
+            "consumerName": document.getElementById("membername").value
+        }
+
+        $.ajax({
+            type: 'put',   //put 방식으로 전송
+            url: '/board/buy',   //데이터를 주고받을 파일 주소
+            data: JSON.stringify(data),   //위의 변수에 담긴 데이터를 전송해준다.
+            dataType: 'JSON',   //html 파일 형식으로 값을 담아온다.
+            contentType: "application/json; charset-utf-8",
+            success: function(data){   //파일 주고받기가 성공했을 경우. data 변수 안에 값을 담아온다.
+                alert("구매 성공하였습니다.");
+            },
+            error: function(){
+                alert("구매 실패하였습니다.", data);
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
