@@ -1,4 +1,4 @@
-# Week 1
+구현된 레파지토리 : https://github.com/ghrnwjd/springboot/tree/main/iamport
 
 ## 스프링 부트 프로젝트 폴더 구조
 
